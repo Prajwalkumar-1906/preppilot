@@ -1,0 +1,1014 @@
+[
+  {
+    "role_tag": "SDE",
+    "category": "dsa_concepts",
+    "difficulty": "easy",
+    "question_text": "How does a Hash Map handle collisions under the hood, and what is the difference between Separate Chaining and Open Addressing?",
+    "expected_key_points": [
+      "Hash function maps keys to array buckets/indexes",
+      "Collisions happen when distinct keys produce identical hash indices",
+      "Separate Chaining stores colliding elements in a linked list or balanced tree at that bucket",
+      "Open Addressing probes for alternate available slots (linear, quadratic, or double hashing)",
+      "Average time complexity is O(1) for lookup/insert, degrading to O(N) under high collision or poor hash function"
+    ],
+    "common_mistakes": [
+      "Assuming a hash map never experiences collisions",
+      "Forgetting to mention load factor and dynamic resizing",
+      "Confusing Open Addressing with creating external secondary arrays"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "SDE",
+    "category": "dsa_concepts",
+    "difficulty": "medium",
+    "question_text": "Explain how the Two Pointer and Sliding Window patterns differ, and describe a problem where a dynamic sliding window is optimal.",
+    "expected_key_points": [
+      "Two pointers typically converge or move at different speeds (e.g. fast/slow pointers for cycle detection)",
+      "Sliding window maintains a contiguous subarray/substring with expanding right and contracting left pointers",
+      "Dynamic window adjusts boundaries based on validity constraints (e.g. Longest Substring Without Repeating Characters)",
+      "Reduces nested O(N^2) loops to linear O(N) time complexity"
+    ],
+    "common_mistakes": [
+      "Using two pointers when elements are unsorted and require sorting first",
+      "Failing to advance the left pointer properly inside the while loop",
+      "Confusing static fixed-size windows with dynamically expanding/shrinking windows"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "SDE",
+    "category": "dsa_concepts",
+    "difficulty": "hard",
+    "question_text": "Describe Dijkstra's algorithm for finding shortest paths in a weighted graph. When does it fail, and how does the choice of priority queue affect its time complexity?",
+    "expected_key_points": [
+      "Greedy approach visiting the unvisited vertex with minimal tentative distance",
+      "Fails on graphs with negative weight cycles or negative edge weights (requires Bellman-Ford)",
+      "Using a binary heap gives O((V + E) log V) time complexity",
+      "Using Fibonacci heap achieves O(E + V log V)"
+    ],
+    "common_mistakes": [
+      "Claiming Dijkstra works correctly with negative edges",
+      "Forgetting to mark nodes as visited or handling duplicate heap entries",
+      "Confusing Dijkstra with A* heuristic search or BFS on unweighted graphs"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "SDE",
+    "category": "system_design_basics",
+    "difficulty": "medium",
+    "question_text": "Design a URL shortening service like Bitly. How would you generate unique short keys, and how would you handle heavy read-to-write traffic ratio?",
+    "expected_key_points": [
+      "Read-heavy ratio (e.g., 100:1 read to write), requiring aggressive caching (Redis / Memcached)",
+      "Short key generation via Base62 encoding of an auto-incrementing ID or MD5/SHA256 with collision resolution",
+      "Database schema storing short_key, original_url, user_id, created_at, expires_at",
+      "HTTP 301 (permanent) vs 302 (temporary) redirect trade-offs for analytics tracking",
+      "Database partitioning/sharding strategy by short_key hash"
+    ],
+    "common_mistakes": [
+      "Relying on random string generation without collision handling",
+      "Choosing HTTP 301 without acknowledging that browser caching prevents click analytics",
+      "Neglecting database indexing on the short_key column"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "SDE",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "What is the difference between a Process and a Thread, and what resources are shared between threads of the same process?",
+    "expected_key_points": [
+      "A process is an executing program instance with its own isolated address space",
+      "A thread is a lightweight execution unit within a process",
+      "Threads share heap memory, open file descriptors, code segments, and global variables",
+      "Each thread maintains its own program counter, stack, and registers",
+      "Context switching between threads is faster than between processes"
+    ],
+    "common_mistakes": [
+      "Claiming threads share their call stacks",
+      "Ignoring race conditions and need for synchronization (mutexes, semaphores)",
+      "Confusing multithreading with multiprocessing in interpreted languages (e.g., Python GIL)"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "SDE",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "What are the ACID properties in database management systems, and how does Write-Ahead Logging (WAL) ensure durability?",
+    "expected_key_points": [
+      "Atomicity: All operations succeed or all roll back",
+      "Consistency: Data transitions from one valid state to another satisfying constraints",
+      "Isolation: Concurrent transactions do not interfere with each other (isolation levels)",
+      "Durability: Committed data survives system crashes",
+      "WAL records changes to disk sequentially before writing dirty pages to data files"
+    ],
+    "common_mistakes": [
+      "Explaining Consistency as CAP theorem consistency rather than database relational invariants",
+      "Thinking WAL writes directly to the primary table files",
+      "Assuming highest isolation (Serializable) has zero performance penalty"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "SDE",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Tell me about a time you encountered a severe bug right before a project deadline. How did you diagnose it, prioritize, and communicate with your team?",
+    "expected_key_points": [
+      "STAR framework: clear Situation and Task context",
+      "Action: Systematic debugging steps (binary search through commits, log analysis, reproducing in isolation)",
+      "Prioritization: assessing blast radius vs hotfix vs rolling back",
+      "Communication: transparent updates to stakeholders on ETA and risk",
+      "Result: Root cause analysis, post-mortem, and automated regression test added"
+    ],
+    "common_mistakes": [
+      "Blaming teammates or external libraries without ownership",
+      "Describing panic without methodical troubleshooting steps",
+      "Failing to articulate the outcome or preventive measure"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "SDE",
+    "category": "project_based",
+    "difficulty": "medium",
+    "question_text": "Walk me through the most technically challenging feature you implemented in your college or personal project. What architectural decisions did you make?",
+    "expected_key_points": [
+      "Clear problem formulation and technical constraints",
+      "Architecture breakdown (frontend, backend APIs, data store, external services)",
+      "Specific technical hurdle (e.g., latency, state management, concurrency, schema design)",
+      "Evaluation of alternatives considered before choosing the final design",
+      "Quantifiable metrics or lessons learned"
+    ],
+    "common_mistakes": [
+      "Surface-level summary without explaining 'why' technical choices were made",
+      "Claiming there were no challenges or everything worked on first try",
+      "Focusing exclusively on UI styling rather than technical engineering depth"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "SDE",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "Why do you want to join our engineering team as a fresher, and what are your technical learning goals for your first 6 months?",
+    "expected_key_points": [
+      "Genuine alignment with company technology stack, engineering culture, and product mission",
+      "Concrete learning goals (mastering testing, CI/CD pipelines, system debugging, code reviews)",
+      "Proactive curiosity and willingness to learn from senior mentors",
+      "Growth mindset: viewing constructive critique as an accelerator"
+    ],
+    "common_mistakes": [
+      "Giving generic answers applicable to any company (e.g., 'good brand name')",
+      "Overstating existing knowledge rather than demonstrating humility and hunger to learn",
+      "Focusing only on compensation or perks"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "Explain the difference between `var`, `let`, and `const` in JavaScript, with focus on scope, hoisting, and the Temporal Dead Zone (TDZ).",
+    "expected_key_points": [
+      "`var` is function-scoped and hoisted with an initial value of undefined",
+      "`let` and `const` are block-scoped and hoisted without initialization into the TDZ",
+      "Accessing a `let` or `const` variable before declaration throws a ReferenceError",
+      "`const` prevents reassignment of the identifier, but does not deeply freeze mutable objects"
+    ],
+    "common_mistakes": [
+      "Claiming `let` and `const` are not hoisted at all",
+      "Believing `const` makes an object or array immutable",
+      "Confusing block scope with function scope"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "How does React's Virtual DOM and Reconciliation algorithm (Fiber) work, and why is using array index as a list `key` an anti-pattern?",
+    "expected_key_points": [
+      "Virtual DOM is an in-memory representation of real DOM elements",
+      "Reconciliation diffs new Virtual DOM tree against the previous snapshot (heuristic O(N) diffing)",
+      "React Fiber enables interruptible, prioritized rendering across chunks",
+      "Keys provide persistent identity across re-renders for sibling elements",
+      "Using index as key causes bugs when items are reordered, inserted, or filtered because component state attaches to indices"
+    ],
+    "common_mistakes": [
+      "Saying Virtual DOM is inherently faster than direct vanilla DOM manipulation",
+      "Not knowing how index keys corrupt form inputs or unmount incorrect components",
+      "Confusing Fiber architecture with multithreading in the browser"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "technical",
+    "difficulty": "hard",
+    "question_text": "Describe the critical rendering path of a browser from receiving HTML bytes to painting pixels on screen. How do you optimize Core Web Vitals (LCP, INP, CLS)?",
+    "expected_key_points": [
+      "Parsing HTML into DOM tree, parsing CSS into CSSOM tree",
+      "Combining DOM and CSSOM into Render Tree",
+      "Layout (reflow) calculates geometry; Paint fills pixels; Compositing layers on GPU",
+      "LCP (Largest Contentful Paint): optimize critical hero image/text, preloading, server-side caching",
+      "INP (Interaction to Next Paint): breaking long tasks into requestAnimationFrame / Web Workers",
+      "CLS (Cumulative Layout Shift): reserving aspect-ratio boxes for images and ads"
+    ],
+    "common_mistakes": [
+      "Confusing Layout/Reflow with Repaint",
+      "Referencing deprecated FID instead of current INP for interactivity",
+      "Ignoring render-blocking JavaScript and CSS link tags"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Describe a scenario where you disagreed with a designer or product manager on a frontend feature's implementation or usability. How did you resolve it?",
+    "expected_key_points": [
+      "STAR framework structure",
+      "Empathy for user experience vs technical feasibility/performance trade-offs",
+      "Using data, prototypes, or user accessibility guidelines (WCAG) to ground discussions",
+      "Finding a win-win compromise that preserved user experience without excessive complexity",
+      "Outcome and positive working relationship maintained"
+    ],
+    "common_mistakes": [
+      "Dismissing design as unimportant or PMs as unrealistic",
+      "Yielding without explaining technical implications or accessibility flaws",
+      "Failing to present constructive alternatives"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "project_based",
+    "difficulty": "medium",
+    "question_text": "How did you manage state in your largest React application? Explain why you selected your state management solution over alternatives.",
+    "expected_key_points": [
+      "Distinction between server state (React Query / SWR) and client UI state (Zustand / Redux / Context)",
+      "Evaluation of prop drilling vs Context vs external store",
+      "Handling caching, revalidation, and optimistic updates",
+      "Performance optimization (preventing unnecessary component re-renders via selectors or memoization)",
+      "Trade-offs in boilerplate, bundle size, and developer ergonomics"
+    ],
+    "common_mistakes": [
+      "Putting all asynchronous backend fetch state into global Redux store without caching",
+      "Using React Context for frequently updating data without splitting contexts",
+      "Failing to explain why Redux or Zustand was chosen over built-in state"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "dsa_concepts",
+    "difficulty": "medium",
+    "question_text": "How would you implement an autocomplete search input with debouncing in JavaScript? What is the difference between Debouncing and Throttling?",
+    "expected_key_points": [
+      "Debounce delays function execution until after a specified silence duration since last trigger",
+      "Throttle guarantees function execution at most once every interval period",
+      "Autocomplete input benefits from debounce to minimize unnecessary network requests",
+      "Implementation using `setTimeout` and `clearTimeout` closure",
+      "Handling asynchronous race conditions (cancelling stale fetch requests via AbortController)"
+    ],
+    "common_mistakes": [
+      "Swapping debounce and throttle definitions",
+      "Forgetting to clear previous timeouts on subsequent keystrokes",
+      "Not handling out-of-order network responses (stale search results overwriting newer ones)"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "system_design_basics",
+    "difficulty": "medium",
+    "question_text": "How would you design the frontend architecture for an infinite-scroll photo feed like Instagram? How do you prevent DOM memory bloat?",
+    "expected_key_points": [
+      "Virtualization / Windowing (rendering only items in or near the viewport, recycling DOM nodes)",
+      "IntersectionObserver API for detecting when user reaches scroll threshold",
+      "Paginated cursor-based API consumption",
+      "Image optimization: lazy loading (`loading='lazy'`), responsive `srcset`, placeholder skeletons",
+      "Preserving scroll position when navigating back and forth"
+    ],
+    "common_mistakes": [
+      "Appending endless DOM nodes until the browser crashes from memory exhaustion",
+      "Using window scroll event listeners without throttling or passive flags",
+      "Ignoring placeholder dimension reservation causing massive layout shifts (CLS)"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "Frontend technologies evolve rapidly with new frameworks and tools every year. How do you decide what to learn and avoid shiny object syndrome?",
+    "expected_key_points": [
+      "Prioritizing deep mastery of web fundamentals (HTML, CSS, JavaScript, Browser APIs, HTTP)",
+      "Evaluating new tools based on solved production problems rather than hype",
+      "Checking community health, documentation, maintenance, and enterprise adoption",
+      "Learning through small proof-of-concept projects rather than rewriting entire production apps"
+    ],
+    "common_mistakes": [
+      "Admitting to jumping onto every new framework without mastering core JavaScript",
+      "Dismissing modern tooling entirely as unnecessary churn",
+      "Not having a systematic framework for technical evaluation"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "Explain the difference between Synchronous and Asynchronous I/O. When is an asynchronous framework like FastAPI or Node.js beneficial, and when does it not help?",
+    "expected_key_points": [
+      "Sync I/O blocks the thread until network or disk operations return",
+      "Async I/O yields execution back to the event loop while awaiting I/O operations",
+      "Beneficial for I/O-bound workloads (database queries, external API calls, microservices)",
+      "Does NOT help for CPU-bound tasks (cryptography, video processing, ML inference) which block the single thread",
+      "Concurrency vs parallelism distinction"
+    ],
+    "common_mistakes": [
+      "Assuming async code automatically executes faster for CPU-heavy mathematics",
+      "Confusing asynchronous event loops with multi-core parallelism",
+      "Calling blocking synchronous code inside async routes without thread offloading"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "What is the N+1 query problem in Object-Relational Mappers (ORMs), and how do you diagnose and resolve it in SQL or SQLAlchemy?",
+    "expected_key_points": [
+      "Occurs when an application executes 1 initial query to fetch N parent records, then N subsequent queries for each child",
+      "Causes severe database connection strain and latency degradation",
+      "Diagnosed via SQL query loggers, profiling tools, or ORM echo mode",
+      "Resolved via eager loading: SQL JOIN (`joinedload`) or subquery/in-clause batching (`selectinload`)",
+      "Trade-offs between cartesian product overhead in joins vs multiple round-trips in selectin"
+    ],
+    "common_mistakes": [
+      "Not understanding why lazy loading causes N round-trips",
+      "Claiming indexes prevent the N+1 problem",
+      "Not distinguishing when a JOIN is better versus an IN query"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "technical",
+    "difficulty": "hard",
+    "question_text": "Explain how distributed locking works in a microservices environment. How does Redis Redlock achieve mutual exclusion, and what are Martin Kleppmann's critiques regarding clock drift?",
+    "expected_key_points": [
+      "Distributed lock ensures only one worker executes a critical section across multiple nodes",
+      "Basic Redis: `SET key val NX PX ttl` with unique random value for safe release via Lua script",
+      "Redlock algorithm acquires locks across N independent Redis nodes with majority quorum (N/2 + 1)",
+      "Critique: Pauses (GC pauses, network partitions) and asynchronous system clock jumps can invalidate lock lease before completion",
+      "Fencing tokens (monotonically increasing version numbers) as the reliable storage-level safeguard"
+    ],
+    "common_mistakes": [
+      "Releasing locks with a simple DEL command without verifying lock ownership value",
+      "Assuming system clocks are perfectly monotonic and immune to NTP jumps",
+      "Not knowing what a fencing token is"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "system_design_basics",
+    "difficulty": "medium",
+    "question_text": "Design a rate limiter for a public REST API. Compare Token Bucket, Leaky Bucket, and Sliding Window Counter algorithms.",
+    "expected_key_points": [
+      "Rate limiting protects backend against abuse, DDoS, and cascading failures",
+      "Token Bucket: tokens added at steady rate, allows bursts up to bucket capacity; memory efficient",
+      "Leaky Bucket: requests queue and process at constant rate, smooths traffic bursts",
+      "Sliding Window Counter: hybrid of fixed window and log, prevents burst spikes at boundary borders",
+      "Distributed implementation using Redis sorted sets (ZSET) or atomic increment scripts"
+    ],
+    "common_mistakes": [
+      "Choosing Fixed Window without addressing the 2x burst vulnerability at window transitions",
+      "Storing rate limiter state in-memory on single instances without distributed Redis",
+      "Failing to return HTTP 429 Too Many Requests with Retry-After header"
+    ],
+    "time_suggestion_sec": 220
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "dsa_concepts",
+    "difficulty": "medium",
+    "question_text": "How would you implement a Least Recently Used (LRU) Cache with O(1) get and put operations? Which data structures are combined and why?",
+    "expected_key_points": [
+      "Combines a Hash Map and a Doubly Linked List",
+      "Hash Map provides O(1) key-to-node lookup",
+      "Doubly Linked List allows O(1) removal and insertion at head/tail without shifting elements",
+      "Get operation moves accessed node to head of list",
+      "Put operation evicts tail node when capacity is exceeded and adds new node at head"
+    ],
+    "common_mistakes": [
+      "Using a singly linked list where removing a node requires O(N) traversal to find predecessor",
+      "Using an array/list where removal or insertion causes O(N) memory shift",
+      "Forgetting to update the hash map when evicting the tail node"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Tell me about a time you had to make a trade-off between shipping a backend feature quickly versus writing clean, maintainable architecture. How did you document tech debt?",
+    "expected_key_points": [
+      "STAR framework format",
+      "Evaluating business urgency vs long-term maintainability and risk",
+      "Deliberate technical debt: making shortcuts explicit rather than accidental",
+      "Mitigation: adding automated regression tests, monitoring alerts, and tracking refactoring tickets in backlog",
+      "Follow-up: returning to pay down the technical debt in subsequent sprints"
+    ],
+    "common_mistakes": [
+      "Pretending perfect code is always written with zero time pressures",
+      "Shipping messy code without documenting debt or planning remediation",
+      "Blaming product managers for deadlines"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "project_based",
+    "difficulty": "medium",
+    "question_text": "How did you design the authentication and authorization mechanism for your backend project? What security threats did you mitigate?",
+    "expected_key_points": [
+      "Authentication method: JWT (access + refresh tokens) vs session cookies",
+      "Password hashing: bcrypt or argon2 with salt rounds",
+      "Token storage and transmission (HttpOnly cookies vs Authorization headers)",
+      "Threat mitigations: CSRF protection, XSS injection sanitization, SQL injection prevention via ORM parameterization",
+      "Role-Based Access Control (RBAC) enforcement at endpoint dependency level"
+    ],
+    "common_mistakes": [
+      "Storing plaintext passwords or using outdated hashes (MD5, SHA1)",
+      "Storing JWTs in localStorage without considering XSS vulnerability",
+      "Putting sensitive data (passwords, PII) inside the JWT payload"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "Backend development often involves handling unexpected production outages and alerts. How do you handle high-pressure incidents?",
+    "expected_key_points": [
+      "Staying calm and following standardized runbooks",
+      "Focusing on triage and immediate mitigation (rollback, restarting, scaling) before root cause deep-dive",
+      "Clear communication with team lead and status updates for users",
+      "Blameless post-mortem culture: focusing on systemic fixes and automated safeguards"
+    ],
+    "common_mistakes": [
+      "Panicking or making untested code changes directly on production servers",
+      "Trying to assign blame to individuals during an active incident",
+      "Failing to conduct a post-mortem once systems recover"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "Explain the Bias-Variance Tradeoff in machine learning. How do overfitting and underfitting relate to model complexity?",
+    "expected_key_points": [
+      "Bias is error from erroneous assumptions in the learning algorithm (high bias leads to underfitting)",
+      "Variance is error from sensitivity to small fluctuations in training data (high variance leads to overfitting)",
+      "Total error = Bias^2 + Variance + Irreducible Error",
+      "Underfitting: high training error, high test error; model too simple",
+      "Overfitting: low training error, high test error; model memorizes noise",
+      "Techniques to address: regularization (L1/L2), cross-validation, pruning, dropout, more training data"
+    ],
+    "common_mistakes": [
+      "Confusing bias with societal/fairness bias in dataset demographics",
+      "Thinking high variance means the model is bad at everything",
+      "Failing to mention how regularization counters high variance"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "How does Backpropagation work in Deep Neural Networks, and how does the vanishing gradient problem occur in deep architectures with sigmoid activations?",
+    "expected_key_points": [
+      "Backpropagation computes gradient of loss function with respect to weights using the chain rule of calculus",
+      "Propagates error backward layer by layer from output to input",
+      "Sigmoid derivative maxes out at 0.25; multiplying many small values (<1) causes gradients to exponentially decay toward zero in early layers",
+      "Early layers fail to learn or train extremely slowly",
+      "Solutions: ReLU/GELU activations, Residual connections (ResNet), Batch Normalization, proper weight initialization (He/Xavier)"
+    ],
+    "common_mistakes": [
+      "Confusing forward pass with backward gradient computation",
+      "Not knowing the derivative range of sigmoid (0 to 0.25)",
+      "Assuming backpropagation is the optimizer itself rather than the gradient calculator"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "technical",
+    "difficulty": "hard",
+    "question_text": "Explain the self-attention mechanism in the Transformer architecture. Why does attention scale as O(N^2) with sequence length, and how does FlashAttention address memory bandwidth bottlenecks?",
+    "expected_key_points": [
+      "Query, Key, Value linear projections from input embeddings",
+      "Attention formula: `Softmax(Q * K^T / sqrt(d_k)) * V`",
+      "O(N^2) complexity arises from computing the N x N attention matrix between all token pairs",
+      "Memory bottleneck in standard attention is GPU High Bandwidth Memory (HBM) read/writes for the intermediate N x N matrix",
+      "FlashAttention uses tiling to compute softmax in SRAM without materializing the full N x N matrix in HBM"
+    ],
+    "common_mistakes": [
+      "Forgetting the scaling factor `sqrt(d_k)` and why it prevents vanishing gradients in softmax",
+      "Confusing FLOPs compute bounds with GPU memory bandwidth bounds",
+      "Claiming Transformers are recurrent like LSTMs"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "system_design_basics",
+    "difficulty": "medium",
+    "question_text": "Design an end-to-end Machine Learning pipeline for real-time fraud detection on credit card transactions. How do you handle extreme class imbalance and sub-100ms inference latency?",
+    "expected_key_points": [
+      "Streaming ingestion (Kafka) and feature store (Feast/Redis) for real-time customer behavioral features",
+      "Extreme class imbalance handling: PR-AUC / ROC-AUC metrics instead of accuracy, SMOTE / focal loss / undersampling",
+      "Low latency inference: lightweight models (XGBoost, ONNX runtime quantization, TensorRT)",
+      "Two-phase scoring: fast rules/lightweight model for 99% of transactions, asynchronous deep model for flag reviews",
+      "Monitoring: data drift, concept drift, feature latency tracking"
+    ],
+    "common_mistakes": [
+      "Using accuracy as the evaluation metric on 99.9% negative datasets",
+      "Deploying heavy slow neural networks directly on synchronous payment gateways",
+      "Forgetting to address feature leakage between training and inference"
+    ],
+    "time_suggestion_sec": 240
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "dsa_concepts",
+    "difficulty": "medium",
+    "question_text": "How does the K-Nearest Neighbors (KNN) algorithm work, and how does a KD-Tree optimize search from brute force O(N * D) to average O(D * log N)?",
+    "expected_key_points": [
+      "Non-parametric lazy learning algorithm classifying based on majority vote of K closest Euclidean/Cosine neighbors",
+      "Brute force computes distance to all N points: O(N * D)",
+      "KD-Tree is a binary space partitioning tree cycling through dimensions at each depth",
+      "Prunes search space by comparing target coordinate with split hyperplane and subtree bounding boxes",
+      "Degrades back toward O(N) in very high dimensions (Curse of Dimensionality)"
+    ],
+    "common_mistakes": [
+      "Confusing K-Means clustering (unsupervised) with K-Nearest Neighbors (supervised)",
+      "Forgetting feature scaling (normalization/standardization) before computing Euclidean distances",
+      "Not knowing that KD-Trees degrade in high-dimensional spaces"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Describe a project where your machine learning model performed well on offline validation data but degraded when deployed to production. How did you diagnose and fix it?",
+    "expected_key_points": [
+      "STAR framework structure",
+      "Identifying root cause: data drift, concept drift, training-serving skew, or feature leakage",
+      "Diagnostic steps: log comparison, feature distribution monitoring (Kolmogorov-Smirnov / PSI)",
+      "Remediation: retraining on updated distributions, fixing data leakage in preprocessing pipeline",
+      "Outcome and automated drift detection alerts put in place"
+    ],
+    "common_mistakes": [
+      "Claiming offline model accuracy always transfers seamlessly to production",
+      "Not knowing the difference between data drift (input distribution change) and concept drift (relationship change)",
+      "Failing to implement automated data validation checks"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "project_based",
+    "difficulty": "medium",
+    "question_text": "Walk me through an ML project where you built the data preprocessing, training, and deployment pipeline. What loss function and evaluation metrics did you select, and why?",
+    "expected_key_points": [
+      "Data ingestion, handling missing values, encoding, and train/val/test split without leakage",
+      "Choice of model and justification over simpler baselines",
+      "Selection of loss function matching problem formulation (e.g. CrossEntropy, MSE, Focal Loss)",
+      "Evaluation metrics aligned with real-world utility (Precision, Recall, F1, AUC-ROC, RMSE)",
+      "Deployment strategy (Docker container, FastAPI endpoint, batch vs real-time inference)"
+    ],
+    "common_mistakes": [
+      "Preprocessing the full dataset before splitting into train/test (data leakage)",
+      "Choosing a complex model when a simple logistic regression or decision tree was sufficient",
+      "Failing to explain why a specific metric was chosen"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "Machine learning research moves at breakneck speed with new papers published daily. How do you balance staying updated with delivering practical engineering impact?",
+    "expected_key_points": [
+      "Focusing on foundational principles that remain constant over hype cycles",
+      "Filtering papers by pragmatic production applicability and community reproduction",
+      "Prioritizing working prototypes and business metrics over chasing minor theoretical benchmarks",
+      "Sharing learnings with the engineering team via tech talks or reading groups"
+    ],
+    "common_mistakes": [
+      "Admitting to spending all day reading papers without shipping code",
+      "Ignoring recent state-of-the-art advances entirely",
+      "Chasing novelty for its own sake rather than solving user problems"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "What is the difference between `WHERE` and `HAVING` clauses in SQL, and how does the SQL query execution order affect them?",
+    "expected_key_points": [
+      "`WHERE` filters individual rows before grouping occurs; cannot use aggregate functions",
+      "`HAVING` filters aggregated groups after the `GROUP BY` clause is evaluated",
+      "SQL execution order: FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY -> LIMIT",
+      "Performance consideration: filtering rows early in `WHERE` reduces data volume before grouping"
+    ],
+    "common_mistakes": [
+      "Using `HAVING` to filter non-aggregated columns that could be filtered in `WHERE`",
+      "Thinking `WHERE` and `HAVING` are interchangeable",
+      "Confusing SQL written syntax order with query logical execution order"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "Explain the difference between SQL Window Functions and Aggregate functions. Provide examples of `ROW_NUMBER()`, `RANK()`, and `DENSE_RANK()`.",
+    "expected_key_points": [
+      "Aggregate functions collapse multiple rows into a single summary row per group",
+      "Window functions perform calculations across a set of rows while preserving individual row identities",
+      "`ROW_NUMBER()` assigns strictly sequential unique integers (1, 2, 3, 4)",
+      "`RANK()` leaves gaps after duplicate values (1, 2, 2, 4)",
+      "`DENSE_RANK()` leaves no gaps after duplicate values (1, 2, 2, 3)",
+      "Use case: finding the top N records per department or rolling moving averages"
+    ],
+    "common_mistakes": [
+      "Confusing `RANK()` and `DENSE_RANK()` tie-breaking behaviors",
+      "Forgetting the `OVER (PARTITION BY ... ORDER BY ...)` syntax requirement",
+      "Thinking window functions collapse rows like `GROUP BY`"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "technical",
+    "difficulty": "hard",
+    "question_text": "What is Simpson's Paradox, and how can an aggregated metric show an opposite trend compared to disaggregated sub-cohorts? Give a concrete business example.",
+    "expected_key_points": [
+      "A phenomenon where a trend appears in several groups of data but disappears or reverses when the groups are combined",
+      "Caused by confounding variables and unequal sample size distributions across sub-cohorts",
+      "Business example: Conversion rate appearing higher overall for Variant B, while Variant A wins in both Mobile and Desktop subgroups separately",
+      "Importance of segmenting data across key dimensions (demographics, device type, user tenure) before drawing conclusions"
+    ],
+    "common_mistakes": [
+      "Confusing correlation with causation without understanding the confounding variable",
+      "Failing to provide a clear numerical or conceptual example",
+      "Believing aggregate data is always more reliable than segmented data"
+    ],
+    "time_suggestion_sec": 220
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "system_design_basics",
+    "difficulty": "medium",
+    "question_text": "Compare an OLTP database (like PostgreSQL) with an OLAP data warehouse (like Snowflake, BigQuery, or ClickHouse). Why is columnar storage optimal for analytics?",
+    "expected_key_points": [
+      "OLTP is row-oriented, optimized for high-volume, low-latency transactional writes and point lookups",
+      "OLAP is column-oriented, optimized for complex analytical aggregations (SUM, AVG) across millions of rows",
+      "Columnar storage reads only the specific columns requested in query, skipping irrelevant disk I/O",
+      "Columnar data has high compression ratios because identical data types and repetitive values cluster together",
+      "Trade-off: OLAP systems have high latency on single-row updates/inserts"
+    ],
+    "common_mistakes": [
+      "Trying to use a data warehouse as a real-time transactional web backend",
+      "Not knowing why columnar storage compresses much better than row storage",
+      "Thinking OLTP and OLAP are just software brand differences rather than architectural paradigms"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "dsa_concepts",
+    "difficulty": "easy",
+    "question_text": "How do you detect and handle outliers in a dataset using the Interquartile Range (IQR) method and Z-score? When is median preferred over mean?",
+    "expected_key_points": [
+      "IQR = Q3 (75th percentile) - Q1 (25th percentile)",
+      "Outlier bounds: Values < Q1 - 1.5 * IQR or > Q3 + 1.5 * IQR",
+      "Z-score measures standard deviations from the mean (typically |Z| > 3 considered outlier for normal distributions)",
+      "Mean is sensitive to extreme outliers; Median is a robust measure of central tendency for skewed distributions (e.g. salary, housing prices)"
+    ],
+    "common_mistakes": [
+      "Using Z-score on heavily skewed or non-normal distributions",
+      "Automatically deleting outliers without investigating whether they represent genuine real-world events",
+      "Confusing Q1 and Q3 definitions"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Tell me about a time your data analysis contradicted a senior stakeholder's intuition or hypothesis. How did you present the data and navigate the conversation?",
+    "expected_key_points": [
+      "STAR framework structure",
+      "Validating the analysis thoroughly before presenting (checking edge cases, data cleanliness, methodology)",
+      "Presenting objective data with clear visual storytelling rather than confrontational rhetoric",
+      "Acknowledging the stakeholder's business context while clearly demonstrating the empirical findings",
+      "Outcome: A data-informed decision was reached, preventing costly business errors"
+    ],
+    "common_mistakes": [
+      "Backing down and altering findings to please leadership",
+      "Being antagonistic and claiming business stakeholders 'don't understand math'",
+      "Presenting confusing raw query dumps rather than clean visual insights"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "project_based",
+    "difficulty": "medium",
+    "question_text": "Describe an end-to-end data analysis or dashboard project you built. How did you translate messy raw data into actionable business recommendations?",
+    "expected_key_points": [
+      "Raw data source identification and data cleansing (handling nulls, duplicates, anomalies)",
+      "Data modeling (star schema, fact and dimension tables)",
+      "Dashboard design principles (clarity, drill-down capabilities, KPI prominence)",
+      "Concrete business impact or actionable takeaway delivered to stakeholders"
+    ],
+    "common_mistakes": [
+      "Focusing only on chart colors rather than underlying business questions and data veracity",
+      "Not explaining how messy data was cleaned and transformed",
+      "Failing to articulate what action was taken based on the dashboard"
+    ],
+    "time_suggestion_sec": 200
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "How do you ensure data accuracy and verify your calculations before sharing reports with executive leadership?",
+    "expected_key_points": [
+      "Sanity checks: cross-referencing with trusted benchmarks and historical baseline trends",
+      "Writing automated SQL unit checks (e.g., asserting primary keys are unique and non-null)",
+      "Peer review and spot-checking edge cases",
+      "Documenting assumptions, caveats, and data freshness timestamps"
+    ],
+    "common_mistakes": [
+      "Admitting to sending unverified query outputs directly to executives",
+      "Not having a systematic QA checklist for reporting",
+      "Hiding caveats or data gaps rather than making them transparent"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "behavioral",
+    "difficulty": "easy",
+    "question_text": "Tell me about yourself. Walk me through your academic background, technical journey, and why you are excited to start your career in technology.",
+    "expected_key_points": [
+      "Concise 2-minute elevator pitch structured as Past, Present, Future",
+      "Past: academic foundation in computer science or relevant quantitative discipline",
+      "Present: practical engineering projects, hackathons, open-source, or internship highlights",
+      "Future: why this specific career track and excitement to contribute to real-world engineering teams"
+    ],
+    "common_mistakes": [
+      "Reciting your entire resume chronologically line-by-line",
+      "Rambling beyond 3 minutes without clear direction or structure",
+      "Focusing exclusively on personal hobbies rather than professional journey"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Give an example of a situation where you had to work with a difficult team member on a group project. How did you handle interpersonal friction?",
+    "expected_key_points": [
+      "STAR framework structure",
+      "Focusing on the collaborative goal rather than personal insults or drama",
+      "Proactive 1-on-1 communication to understand underlying blockers or personal constraints",
+      "Re-aligning on milestones, roles, and objective expectations",
+      "Successful delivery of the project while maintaining professional respect"
+    ],
+    "common_mistakes": [
+      "Venting and painting the teammate as malicious or incompetent",
+      "Claiming you simply did all the work yourself without attempting communication",
+      "Claiming you have never had a disagreement or difficult teammate"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "behavioral",
+    "difficulty": "hard",
+    "question_text": "Describe a significant failure or mistake you made during a software project or academic assignment. What were the consequences, and what did you learn?",
+    "expected_key_points": [
+      "Authentic, genuine failure rather than a thinly disguised humblebrag",
+      "Taking full personal ownership without deflecting blame to professors or partners",
+      "Immediate corrective action taken to mitigate damage",
+      "Deep personal reflection on the root cause (e.g., poor time estimation, skipping tests)",
+      "Long-term behavioral change and preventive mechanisms adopted"
+    ],
+    "common_mistakes": [
+      "Sharing a fake failure (e.g., 'I worked too hard and was a perfectionist')",
+      "Blaming external circumstances or other people",
+      "Sharing a catastrophic ethical violation"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "hr",
+    "difficulty": "easy",
+    "question_text": "What are your greatest strengths as a software engineer, and what is one genuine area of improvement you are actively working on?",
+    "expected_key_points": [
+      "Strengths backed by concrete examples (e.g., disciplined debugging, proactive curiosity, thorough documentation)",
+      "Genuine weakness (not a cliché) that does not disqualify you from core engineering (e.g., public speaking, over-engineering early prototypes)",
+      "Clear, ongoing action steps taken to improve that weakness",
+      "Self-awareness and growth mindset"
+    ],
+    "common_mistakes": [
+      "Saying 'I don't have any weaknesses'",
+      "Using cliché humblebrags ('I care too much', 'I am a perfectionist')",
+      "Stating a fatal weakness without any plan for improvement ('I hate working with people')"
+    ],
+    "time_suggestion_sec": 160
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "hr",
+    "difficulty": "medium",
+    "question_text": "Where do you see yourself in 3 to 5 years, and how does this entry-level engineering role fit into your long-term career aspirations?",
+    "expected_key_points": [
+      "Realistic progression: mastering engineering fundamentals, gaining technical autonomy, and contributing to system architecture",
+      "Desire to mentor future interns and take ownership of critical features",
+      "Commitment to continuous learning and technical depth",
+      "Alignment with the company's growth trajectory"
+    ],
+    "common_mistakes": [
+      "Giving unrealistic timelines (e.g., 'I want to be CTO in 2 years')",
+      "Indicating plans to leave tech or pursue an unrelated degree in 6 months",
+      "Not demonstrating passion for engineering excellence"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "behavioral",
+    "difficulty": "medium",
+    "question_text": "Describe a time when you had multiple competing deadlines across coursework, exams, or projects. How did you prioritize your time and prevent burnout?",
+    "expected_key_points": [
+      "Systematic prioritization framework (Eisenhower matrix, impact vs effort, urgency)",
+      "Proactive communication with professors/stakeholders to reset expectations early",
+      "Breaking large intimidating projects into manageable daily milestones",
+      "Maintaining focus, work-life balance, and physical wellbeing under pressure"
+    ],
+    "common_mistakes": [
+      "Describing chronic procrastination followed by pulling 3 all-nighters",
+      "Dropping commitments silently without communicating with teammates",
+      "Pretending stress never affects you"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "project_based",
+    "difficulty": "easy",
+    "question_text": "When working on a software project, how do you handle receiving critical code review feedback from teammates or mentors?",
+    "expected_key_points": [
+      "Separating self-worth and identity from code: viewing feedback as critique of the code, not the person",
+      "Approaching feedback with curiosity and asking clarifying questions to understand architectural reasoning",
+      "Demonstrating gratitude for mentors investing time to improve code quality",
+      "Implementing changes promptly and documenting best practices learned"
+    ],
+    "common_mistakes": [
+      "Becoming defensive or argumentative in pull request discussions",
+      "Blindly agreeing and copying changes without understanding the underlying principle",
+      "Ignoring review comments"
+    ],
+    "time_suggestion_sec": 150
+  },
+  {
+    "role_tag": "SDE",
+    "category": "technical",
+    "difficulty": "hard",
+    "question_text": "Explain the difference between Optimistic Concurrency Control (OCC) and Pessimistic Concurrency Control (PCC). When would you choose one over the other in a high-traffic web application?",
+    "expected_key_points": [
+      "Pessimistic locking locks the resource upfront (e.g. `SELECT FOR UPDATE`), preventing any other transaction from reading or modifying",
+      "Optimistic locking allows concurrent reads and writes without locks, checking for version conflicts at commit time (e.g. `version` column)",
+      "Pessimistic is ideal for high-conflict scenarios where collision recovery is expensive (e.g. seat reservation, bank transfers)",
+      "Optimistic is ideal for low-to-medium conflict scenarios with high throughput needs (e.g. collaborative document editing, profile updates)",
+      "Trade-off: OCC avoids lock overhead and deadlocks, but wastes work on rollbacks during heavy contention"
+    ],
+    "common_mistakes": [
+      "Thinking optimistic locking requires hardware support or special database extensions",
+      "Neglecting deadlock risks associated with pessimistic row locks",
+      "Not explaining how a version/timestamp column implements OCC"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "Frontend Developer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "Explain Web Accessibility (a11y) principles. What is the purpose of Semantic HTML, ARIA attributes, and how do you ensure keyboard navigability for custom widgets?",
+    "expected_key_points": [
+      "Semantic HTML (`<button>`, `<main>`, `<nav>`, `<dialog>`) provides built-in accessibility, keyboard focus, and screen reader roles",
+      "ARIA (Accessible Rich Internet Applications) supplements HTML when native elements are insufficient (`aria-expanded`, `aria-live`)",
+      "First rule of ARIA: Do not use ARIA if a native semantic HTML element exists",
+      "Keyboard navigability: `tabindex` management (0 for focusable in order, -1 for programmatic focus), handling Enter and Space keys",
+      "Color contrast ratios (WCAG AA standard 4.5:1 for normal text)"
+    ],
+    "common_mistakes": [
+      "Using `<div>` with `onClick` without `role='button'`, `tabIndex`, or keyboard event listeners",
+      "Overusing redundant ARIA attributes that duplicate semantic HTML (`<button role='button'>`)",
+      "Neglecting visual `:focus-visible` styling"
+    ],
+    "time_suggestion_sec": 190
+  },
+  {
+    "role_tag": "Backend Developer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "What is the difference between Message Queues (e.g. RabbitMQ / SQS) and Event Streaming Platforms (e.g. Apache Kafka)? When would you use each?",
+    "expected_key_points": [
+      "Message Queues focus on task delivery and work distribution; messages are deleted once acknowledged by a consumer",
+      "Event Streaming (Kafka) stores an immutable, append-only distributed commit log; messages persist for retention periods",
+      "Kafka allows multiple independent consumer groups to replay history and process at their own pace",
+      "RabbitMQ excels at complex routing (exchanges, topics), low-latency single-message workflows, and individual message acknowledgments",
+      "Kafka excels at high-throughput event sourcing, real-time analytics, and stream processing"
+    ],
+    "common_mistakes": [
+      "Assuming Kafka deletes messages immediately when consumed",
+      "Using Kafka for simple background task queues where RabbitMQ or Celery is simpler",
+      "Not understanding consumer groups and offset management"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "ML Engineer",
+    "category": "technical",
+    "difficulty": "medium",
+    "question_text": "What is Retrieval-Augmented Generation (RAG)? How does chunking, vector embedding, similarity search, and reranking improve LLM response quality and prevent hallucinations?",
+    "expected_key_points": [
+      "RAG combines an external knowledge retrieval system with an LLM to ground generation on factual documents",
+      "Chunking splits large documents with overlap to preserve semantic context",
+      "Dense vector embeddings capture semantic meaning into high-dimensional space (e.g. 768 or 1536 dims)",
+      "Approximate Nearest Neighbor (ANN) search (HNSW, FAISS) retrieves top-K candidates efficiently",
+      "Reranker (cross-encoder) re-scores retrieved chunks to ensure the most relevant context is injected into LLM prompt window"
+    ],
+    "common_mistakes": [
+      "Thinking RAG retrains or fine-tunes the LLM weights directly",
+      "Ignoring chunk size and overlap trade-offs (too small loses context, too large dilutes relevance)",
+      "Relying solely on vector similarity without considering hybrid keyword search (BM25)"
+    ],
+    "time_suggestion_sec": 210
+  },
+  {
+    "role_tag": "Data Analyst",
+    "category": "technical",
+    "difficulty": "easy",
+    "question_text": "What is the difference between an `INNER JOIN`, `LEFT JOIN`, `FULL OUTER JOIN`, and `CROSS JOIN` in SQL? Provide an example where a `LEFT JOIN` produces nulls.",
+    "expected_key_points": [
+      "`INNER JOIN` returns only records that have matching keys in both tables",
+      "`LEFT JOIN` returns all records from left table and matched records from right table (filling with NULL if no match)",
+      "`FULL OUTER JOIN` returns all records from both tables, filling NULL on either side where matches do not exist",
+      "`CROSS JOIN` produces the cartesian product (N * M rows) combining each row from table A with every row from table B",
+      "Example: Customers left joined with Orders reveals customers who haven't placed any orders yet (orders.order_id IS NULL)"
+    ],
+    "common_mistakes": [
+      "Adding a condition in the `WHERE` clause on the right table that unintentionally converts a `LEFT JOIN` into an `INNER JOIN`",
+      "Running an accidental `CROSS JOIN` on large production tables causing memory exhaustion",
+      "Confusing `LEFT JOIN` with `UNION`"
+    ],
+    "time_suggestion_sec": 180
+  },
+  {
+    "role_tag": "HR/Behavioral",
+    "category": "behavioral",
+    "difficulty": "easy",
+    "question_text": "Describe a time when you had to learn a completely new programming language or framework under a tight deadline. What was your strategy for ramping up quickly?",
+    "expected_key_points": [
+      "STAR framework structure",
+      "Structured learning approach: official documentation, building a small prototype, referencing idiomatic patterns",
+      "Focusing on transferring foundational concepts from languages already known",
+      "Seeking mentorship and unblocking oneself quickly",
+      "Successful delivery of the project within the deadline"
+    ],
+    "common_mistakes": [
+      "Passive learning (spending days watching video tutorials without writing code)",
+      "Claiming you learned everything instantly without encountering any learning curve",
+      "Not connecting the learning to a concrete shipped outcome"
+    ],
+    "time_suggestion_sec": 160
+  }
+]

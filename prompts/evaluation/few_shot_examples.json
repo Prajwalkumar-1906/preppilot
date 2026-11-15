@@ -1,0 +1,79 @@
+[
+  {
+    "label": "poor",
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "answer": "A hash map doesn't have collisions if you make the array really big. It just puts things in the memory address and then you look it up by key.",
+    "evaluation": {
+      "overall_score": 2.5,
+      "clarity_score": 3.0,
+      "relevance_score": 3.5,
+      "technical_score": 1.5,
+      "strengths": ["Recognizes that memory addresses and arrays are involved"],
+      "weaknesses": ["Fundamentally denies the existence of collisions by claiming an infinite array", "Omits hashing function mechanics and collision resolution"],
+      "missed_key_points": [
+        "Collisions are inevitable by the Pigeonhole Principle",
+        "Separate Chaining with linked lists or balanced trees",
+        "Open Addressing probing techniques"
+      ],
+      "actionable_suggestions": [
+        "Study the Pigeonhole Principle and why hash collisions must occur",
+        "Learn the two primary collision resolution strategies: Separate Chaining and Open Addressing"
+      ],
+      "improved_model_answer": "A hash map maps keys to array buckets via a hash function. Collisions are resolved primarily through Separate Chaining (storing colliding items in linked lists or trees at that index) or Open Addressing (probing subsequent slots linearly or quadratically). With a balanced load factor, average time complexity is O(1).",
+      "reasoning": "The candidate demonstrates fundamental conceptual errors regarding hash map mechanics and collision inevitability.",
+      "confidence": 0.98
+    }
+  },
+  {
+    "label": "average",
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "answer": "When two keys get the same index, they collide. Most hash maps use a linked list at that bucket, which is called chaining. When you look up a key, you search through the list. It takes O(1) time normally, but if too many items collide it can become O(N).",
+    "evaluation": {
+      "overall_score": 6.2,
+      "clarity_score": 6.5,
+      "relevance_score": 7.0,
+      "technical_score": 6.0,
+      "strengths": [
+        "Accurately explains Separate Chaining with linked lists",
+        "Mentions average O(1) vs worst-case O(N) complexity"
+      ],
+      "weaknesses": [
+        "Does not mention Open Addressing or alternate probing methods",
+        "Does not discuss load factors, threshold triggers, or dynamic resizing"
+      ],
+      "missed_key_points": [
+        "Open Addressing (Linear Probing, Quadratic Probing, Double Hashing)",
+        "Load factor threshold and rehashing/resizing"
+      ],
+      "actionable_suggestions": [
+        "Compare Separate Chaining against Open Addressing to demonstrate architectural depth",
+        "Mention Java 8+'s optimization of converting long linked lists to red-black trees"
+      ],
+      "improved_model_answer": "Hash maps resolve collisions using Separate Chaining or Open Addressing. In Separate Chaining, buckets hold linked lists or red-black trees. In Open Addressing, collisions trigger probing for next available slots. Rehashing occurs when the load factor exceeds a threshold (typically 0.75).",
+      "reasoning": "Solid explanation of chaining and complexity, but misses open addressing and resizing dynamics.",
+      "confidence": 0.95
+    }
+  },
+  {
+    "label": "exemplary",
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "answer": "Hash collisions occur when distinct keys produce identical bucket indices via the hash function. There are two primary resolution strategies: 1) Separate Chaining, where each bucket points to a linked list (or balanced red-black tree as in Java 8+ when collisions exceed 8 nodes, reducing worst case from O(N) to O(log N)). 2) Open Addressing, where colliding entries probe alternative slots using Linear Probing, Quadratic Probing, or Double Hashing. To maintain average O(1) lookup and insertion, the map monitors its load factor (N/Capacity); when it exceeds a threshold like 0.75, it dynamically reallocates a larger array (usually 2x) and rehashes existing entries.",
+    "evaluation": {
+      "overall_score": 9.5,
+      "clarity_score": 9.5,
+      "relevance_score": 9.8,
+      "technical_score": 9.5,
+      "strengths": [
+        "Comprehensive coverage of both Separate Chaining and Open Addressing",
+        "Highlights advanced treeification optimizations (Java 8 red-black trees)",
+        "Articulates load factor thresholds, dynamic resizing, and asymptotic complexities"
+      ],
+      "weaknesses": ["Minor: could briefly mention cache locality trade-offs between chaining and open addressing"],
+      "missed_key_points": [],
+      "actionable_suggestions": ["Outstanding answer; maintain this structured, layered approach in real interviews"],
+      "improved_model_answer": "Hash maps resolve collisions via Separate Chaining (linked lists or balanced trees) or Open Addressing (linear/quadratic probing). When load factor exceeds a threshold (e.g., 0.75), dynamic resizing doubles bucket capacity and rehashes keys to preserve O(1) average performance.",
+      "reasoning": "Candidate demonstrates staff-level depth, covering theoretical mechanics, modern runtime optimizations, and resizing algorithms.",
+      "confidence": 0.99
+    }
+  }
+]

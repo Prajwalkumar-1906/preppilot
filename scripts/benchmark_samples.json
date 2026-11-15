@@ -1,0 +1,152 @@
+[
+  {
+    "id": "sample-01",
+    "role": "SDE",
+    "category": "dsa_concepts",
+    "tier": "poor",
+    "target_score_band": [1.0, 4.0],
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "expected_key_points": ["Hash functions and bucket indices", "Separate Chaining", "Open Addressing", "Load factor and resizing"],
+    "answer": "A hash map doesn't have collisions. If you have a collision, it means your computer ran out of memory and crashed."
+  },
+  {
+    "id": "sample-02",
+    "role": "SDE",
+    "category": "dsa_concepts",
+    "tier": "average",
+    "target_score_band": [5.5, 7.5],
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "expected_key_points": ["Hash functions and bucket indices", "Separate Chaining", "Open Addressing", "Load factor and resizing"],
+    "answer": "A hash map puts items into buckets. When two items have the same hash, they collide and get stored in a linked list at that bucket, which is chaining. It is O(1) on average."
+  },
+  {
+    "id": "sample-03",
+    "role": "SDE",
+    "category": "dsa_concepts",
+    "tier": "excellent",
+    "target_score_band": [8.5, 10.0],
+    "question": "How does a Hash Map handle collisions under the hood?",
+    "expected_key_points": ["Hash functions and bucket indices", "Separate Chaining", "Open Addressing", "Load factor and resizing"],
+    "answer": "Hash collisions occur when distinct keys produce identical bucket indices via the hash function. They are resolved via Separate Chaining (using linked lists or red-black trees in high contention) or Open Addressing (linear or quadratic probing). Dynamic resizing occurs when the load factor threshold is crossed to preserve O(1) average lookup."
+  },
+  {
+    "id": "sample-04",
+    "role": "Backend Developer",
+    "category": "technical",
+    "tier": "poor",
+    "target_score_band": [1.0, 4.0],
+    "question": "What is the N+1 query problem in ORMs?",
+    "expected_key_points": ["1 parent query followed by N child queries", "Network & DB strain", "Eager loading (joinedload / selectinload)"],
+    "answer": "N+1 means adding 1 to N in a for loop to calculate the next index of an array."
+  },
+  {
+    "id": "sample-05",
+    "role": "Backend Developer",
+    "category": "technical",
+    "tier": "average",
+    "target_score_band": [5.5, 7.5],
+    "question": "What is the N+1 query problem in ORMs?",
+    "expected_key_points": ["1 parent query followed by N child queries", "Network & DB strain", "Eager loading (joinedload / selectinload)"],
+    "answer": "It happens when you load a parent record and then in a loop query for each child record. It runs 1 query for the parents and N queries for the children. You fix it by eager loading."
+  },
+  {
+    "id": "sample-06",
+    "role": "Backend Developer",
+    "category": "technical",
+    "tier": "excellent",
+    "target_score_band": [8.5, 10.0],
+    "question": "What is the N+1 query problem in ORMs?",
+    "expected_key_points": ["1 parent query followed by N child queries", "Network & DB strain", "Eager loading (joinedload / selectinload)"],
+    "answer": "The N+1 query problem occurs when an ORM issues 1 initial query to retrieve parent entities, followed by N distinct subsequent queries to retrieve relations for each parent due to lazy loading. This creates massive latency and connection pool saturation. It is diagnosed via SQL statement logging and resolved via eager loading: either SQL joins (`joinedload`) or batch subqueries (`selectinload`)."
+  },
+  {
+    "id": "sample-07",
+    "role": "Frontend Developer",
+    "category": "technical",
+    "tier": "poor",
+    "target_score_band": [1.0, 4.0],
+    "question": "Why is using array index as a React key an anti-pattern?",
+    "expected_key_points": ["Reconciliation diffing", "Sibling item identity", "Reordering/filtering bugs", "Component state corruption"],
+    "answer": "It is just a stylistic recommendation by ESLint, but technically array index has zero impact on how React works."
+  },
+  {
+    "id": "sample-08",
+    "role": "Frontend Developer",
+    "category": "technical",
+    "tier": "average",
+    "target_score_band": [5.5, 7.5],
+    "question": "Why is using array index as a React key an anti-pattern?",
+    "expected_key_points": ["Reconciliation diffing", "Sibling item identity", "Reordering/filtering bugs", "Component state corruption"],
+    "answer": "Using index as a key is bad because if you add or remove an item, all the indices shift. React will get confused about which item changed and might re-render unnecessarily."
+  },
+  {
+    "id": "sample-09",
+    "role": "Frontend Developer",
+    "category": "technical",
+    "tier": "excellent",
+    "target_score_band": [8.5, 10.0],
+    "question": "Why is using array index as a React key an anti-pattern?",
+    "expected_key_points": ["Reconciliation diffing", "Sibling item identity", "Reordering/filtering bugs", "Component state corruption"],
+    "answer": "React's reconciliation algorithm relies on keys to establish stable component identity across render cycles. When indices are used as keys, reordering, prepending, or filtering items causes sibling keys to change. React will incorrectly reuse existing DOM nodes and preserve uncontrolled component internal state (such as input focus or values) across mismatched items."
+  },
+  {
+    "id": "sample-10",
+    "role": "ML Engineer",
+    "category": "technical",
+    "tier": "poor",
+    "target_score_band": [1.0, 4.0],
+    "question": "Explain the Bias-Variance Tradeoff in machine learning.",
+    "expected_key_points": ["High bias underfitting", "High variance overfitting", "Total error decomposition", "Regularization"],
+    "answer": "Bias is when the AI is politically biased, and variance is how different the GPUs are."
+  },
+  {
+    "id": "sample-11",
+    "role": "ML Engineer",
+    "category": "technical",
+    "tier": "average",
+    "target_score_band": [5.5, 7.5],
+    "question": "Explain the Bias-Variance Tradeoff in machine learning.",
+    "expected_key_points": ["High bias underfitting", "High variance overfitting", "Total error decomposition", "Regularization"],
+    "answer": "Bias is the error from making simplistic assumptions, which causes underfitting. Variance is when the model is too sensitive to training noise, causing overfitting. Increasing model complexity reduces bias but increases variance."
+  },
+  {
+    "id": "sample-12",
+    "role": "ML Engineer",
+    "category": "technical",
+    "tier": "excellent",
+    "target_score_band": [8.5, 10.0],
+    "question": "Explain the Bias-Variance Tradeoff in machine learning.",
+    "expected_key_points": ["High bias underfitting", "High variance overfitting", "Total error decomposition", "Regularization"],
+    "answer": "Expected prediction error decomposes into Bias^2 + Variance + Irreducible Noise. High bias stems from oversimplified modeling assumptions, leading to underfitting (high training and test loss). High variance arises from excessive model capacity memorizing training data noise (low training loss, high generalization gap). We balance them via cross-validation, regularization (L1/L2), ensemble averaging, and early stopping."
+  },
+  {
+    "id": "sample-13",
+    "role": "HR/Behavioral",
+    "category": "behavioral",
+    "tier": "poor",
+    "target_score_band": [1.0, 4.0],
+    "question": "Tell me about a time you encountered a severe bug right before a project deadline.",
+    "expected_key_points": ["STAR framework", "Root cause triage", "Stakeholder communication", "Post-mortem & prevention"],
+    "answer": "My team member wrote terrible code and ruined everything. I told my professor it wasn't my fault."
+  },
+  {
+    "id": "sample-14",
+    "role": "HR/Behavioral",
+    "category": "behavioral",
+    "tier": "average",
+    "target_score_band": [5.5, 7.5],
+    "question": "Tell me about a time you encountered a severe bug right before a project deadline.",
+    "expected_key_points": ["STAR framework", "Root cause triage", "Stakeholder communication", "Post-mortem & prevention"],
+    "answer": "In our senior capstone, an API broke 2 days before presentation. I isolated the failing endpoint, found a null reference error, patched it, and the demo succeeded."
+  },
+  {
+    "id": "sample-15",
+    "role": "HR/Behavioral",
+    "category": "behavioral",
+    "tier": "excellent",
+    "target_score_band": [8.5, 10.0],
+    "question": "Tell me about a time you encountered a severe bug right before a project deadline.",
+    "expected_key_points": ["STAR framework", "Root cause triage", "Stakeholder communication", "Post-mortem & prevention"],
+    "answer": "Situation: 24 hours prior to our capstone release, database deadlocks caused 500 errors under mock traffic. Task: I needed to diagnose the bottleneck without jeopardizing the deployment deadline. Action: I used git bisect to isolate the locking commit, identified an unindexed foreign key in a concurrent transaction, and added a targeted migration. I communicated transparent hourly updates to my advisor. Result: Deadlocks dropped to 0%, the release succeeded, and I added automated concurrency load tests to prevent regressions."
+  }
+]

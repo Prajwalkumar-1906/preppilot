@@ -1,0 +1,176 @@
+{
+  "timestamp": "2026-11-15 08:48:10",
+  "provider": "MockLLMProvider",
+  "sample_count": 15,
+  "spearman_rho": 1.0,
+  "boundary_adherence_pct": 100.0,
+  "avg_latency_ms": 50.3,
+  "passed": true,
+  "samples": [
+    {
+      "id": "sample-01",
+      "tier": "poor",
+      "target_score_band": [
+        1.0,
+        4.0
+      ],
+      "assigned_score": 2.5,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-02",
+      "tier": "average",
+      "target_score_band": [
+        5.5,
+        7.5
+      ],
+      "assigned_score": 6.8,
+      "in_bounds": true,
+      "latency_ms": 51
+    },
+    {
+      "id": "sample-03",
+      "tier": "excellent",
+      "target_score_band": [
+        8.5,
+        10.0
+      ],
+      "assigned_score": 9.2,
+      "in_bounds": true,
+      "latency_ms": 51
+    },
+    {
+      "id": "sample-04",
+      "tier": "poor",
+      "target_score_band": [
+        1.0,
+        4.0
+      ],
+      "assigned_score": 2.5,
+      "in_bounds": true,
+      "latency_ms": 51
+    },
+    {
+      "id": "sample-05",
+      "tier": "average",
+      "target_score_band": [
+        5.5,
+        7.5
+      ],
+      "assigned_score": 6.8,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-06",
+      "tier": "excellent",
+      "target_score_band": [
+        8.5,
+        10.0
+      ],
+      "assigned_score": 9.2,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-07",
+      "tier": "poor",
+      "target_score_band": [
+        1.0,
+        4.0
+      ],
+      "assigned_score": 2.5,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-08",
+      "tier": "average",
+      "target_score_band": [
+        5.5,
+        7.5
+      ],
+      "assigned_score": 6.8,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-09",
+      "tier": "excellent",
+      "target_score_band": [
+        8.5,
+        10.0
+      ],
+      "assigned_score": 9.2,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-10",
+      "tier": "poor",
+      "target_score_band": [
+        1.0,
+        4.0
+      ],
+      "assigned_score": 2.5,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-11",
+      "tier": "average",
+      "target_score_band": [
+        5.5,
+        7.5
+      ],
+      "assigned_score": 6.8,
+      "in_bounds": true,
+      "latency_ms": 51
+    },
+    {
+      "id": "sample-12",
+      "tier": "excellent",
+      "target_score_band": [
+        8.5,
+        10.0
+      ],
+      "assigned_score": 9.2,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-13",
+      "tier": "poor",
+      "target_score_band": [
+        1.0,
+        4.0
+      ],
+      "assigned_score": 2.5,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-14",
+      "tier": "average",
+      "target_score_band": [
+        5.5,
+        7.5
+      ],
+      "assigned_score": 6.8,
+      "in_bounds": true,
+      "latency_ms": 50
+    },
+    {
+      "id": "sample-15",
+      "tier": "excellent",
+      "target_score_band": [
+        8.5,
+        10.0
+      ],
+      "assigned_score": 9.2,
+      "in_bounds": true,
+      "latency_ms": 51
+    }
+  ]
+}
